@@ -1,0 +1,39 @@
+
+version: 2
+
+sources:
+  - name: banking
+    description: "Physical banking POC tables hosted in Neon PostgreSQL"
+    database: neondb
+    schema: dbt_rbajaj
+
+    tables:
+      - name: counterparty
+        description: "Counterparty master data"
+
+      - name: agreement
+        description: "Legal and trading agreements"
+
+      - name: trade
+        description: "Trade transactions"
+
+      - name: product
+        description: "Financial products"
+
+      - name: account
+        description: "Customer accounts"
+
+      - name: strategist
+        description: "Strategist master data"
+
+      - name: meeting
+        description: "Client meetings"
+
+      - name: meeting_activity
+        description: "Activities associated with meetings"
+
+      - name: meeting_attendee
+        description: "Meeting-to-strategist bridge"
+
+      - name: meeting_outcome
+        description: "Recorded meeting outcomes"

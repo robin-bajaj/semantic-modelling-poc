@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: stg_counterparty
+    description: "Standardizes all source counterparties, including invalid records."
+
+    columns:
+      - name: counterparty_id
+        description: "Original counterparty business identifier."
+
+      - name: counterparty_name
+        description: "Standardized counterparty name."
+
+      - name: risk_rating
+        description: "Normalized risk category."
+
+      - name: risk_score
+        description: "Derived numeric risk score."
+
+      - name: is_active
+        description: "Active indicator; NULL means unknown."

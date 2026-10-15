@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: int_counterparty_valid
+    description: "Validated counterparties approved for analytical reporting."
+
+    columns:
+      - name: counterparty_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: counterparty_name
+        data_tests:
+          - not_null
+
+      - name: risk_rating
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['LOW', 'MEDIUM', 'HIGH']
+
+      - name: active_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Active', 'Inactive']
+
+      - name: risk_score
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3]
+                quote: false
+
+      - name: is_active
+        data_tests:
+          - not_null
+
+  - name: int_counterparty_rejected
+    description: "Counterparty records rejected by data-quality validation rules."
+
+    columns:
+      - name: rejection_reason
+        data_tests:
+          - not_null

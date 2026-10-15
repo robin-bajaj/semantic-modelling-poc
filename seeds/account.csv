@@ -1,0 +1,13 @@
+account_id,counterparty_id,account_name,account_type,base_currency,account_status
+AC001,C001,ABC Institutional,Institutional,USD,Active
+AC002,C001,ABC Treasury,Treasury,CAD,Active
+AC003,C002,Global Trading,Trading,EUR,Active
+AC004,C003,Delta Asia Fund,Investment,USD,Active
+AC005,C004,Maple Pension,Institutional,CAD,Active
+AC006,C005,Pacific Legacy,Institutional,USD,Inactive
+AC007,C006,Atlantic Markets,Trading,EUR,Active
+AC008,C007,Northern Institutional,Institutional,USD,Active
+AC009,C008,Sunrise Growth,Investment,USD,Active
+AC010,C009,Evergreen Legacy,Institutional,EUR,Inactive
+AC011,C010,Meridian Treasury,Treasury,USD,Active
+AC012,C010,Meridian Global,Trading,CAD,Active

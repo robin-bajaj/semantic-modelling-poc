@@ -1,0 +1,23 @@
+activity_id,meeting_id,strategist_id,activity_type,activity_status,duration_minutes
+ACT001,M001,S003,Presentation,Completed,30
+ACT002,M002,S004,Follow Up,Completed,45
+ACT003,M003,S005,Research,Completed,60
+ACT004,M004,S006,Call,Completed,75
+ACT005,M005,S001,Presentation,Completed,15
+ACT006,M006,S002,Follow Up,Completed,30
+ACT007,M007,S003,Research,Completed,45
+ACT009,M009,S005,Presentation,Completed,75
+ACT010,M010,S006,Follow Up,Completed,15
+ACT011,M011,S001,Research,Completed,30
+ACT012,M012,S002,Call,Completed,45
+ACT013,M013,S003,Presentation,Completed,60
+ACT014,M014,S004,Follow Up,Completed,75
+ACT015,M015,S005,Research,Completed,15
+ACT016,M016,S006,Call,Completed,30
+ACT018,M018,S002,Follow Up,Planned,60
+ACT019,M001,S003,Research,Planned,75
+ACT020,M002,S004,Call,Planned,15
+ACT021,M003,S005,Presentation,Planned,30
+ACT022,M004,S006,Follow Up,Planned,45
+ACT023,M005,S001,Research,Planned,60
+ACT024,M006,S002,Call,Planned,75
