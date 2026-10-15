@@ -1,0 +1,120 @@
+version: 2
+
+models:
+  - name: int_counterparty_valid
+    description: "Validated counterparties approved for analytical reporting."
+
+    columns:
+      - name: counterparty_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: counterparty_name
+        data_tests:
+          - not_null
+
+      - name: risk_rating
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['LOW', 'MEDIUM', 'HIGH']
+
+      - name: active_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Active', 'Inactive']
+
+      - name: risk_score
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3]
+                quote: false
+
+      - name: is_active
+        data_tests:
+          - not_null
+
+  - name: int_counterparty_rejected
+    description: "Counterparty records rejected by data-quality validation rules."
+
+    columns:
+      - name: rejection_reason
+        data_tests:
+          - not_null
+
+  
+  - name: int_trade_exposure
+    description: "Trade-level exposure across Counterparty, Agreement, Trade and Product."
+    columns:
+      - name: trade_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: agreement_id
+        data_tests:
+          - not_null
+
+      - name: product_id
+        data_tests:
+          - not_null
+
+  - name: int_agreement_trade_summary
+    description: "Agreement-level trade aggregation preserving agreements without trades."
+    columns:
+      - name: agreement_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: trade_count
+        data_tests:
+          - not_null
+
+      - name: has_no_trades
+        data_tests:
+          - not_null
+
+  
+  - name: int_meeting_outcome_summary
+    description: "Outcome metrics at meeting grain."
+    columns:
+      - name: meeting_id
+        data_tests:
+          - unique
+          - not_null
+      - name: outcome_count
+        data_tests:
+          - not_null
+
+  - name: int_meeting_attendance_summary
+    description: "Participation metrics at meeting grain."
+    columns:
+      - name: meeting_id
+        data_tests:
+          - unique
+          - not_null
+      - name: attendee_count
+        data_tests:
+          - not_null
+
+  - name: int_account_engagement
+    description: "Aggregated engagement metrics at account grain."
+    columns:
+      - name: account_id
+        data_tests:
+          - unique
+          - not_null
+      - name: meeting_count
+        data_tests:
+          - not_null
+      - name: activity_count
+        data_tests:
+          - not_null
+      - name: outcome_count
+        data_tests:
+          - not_null

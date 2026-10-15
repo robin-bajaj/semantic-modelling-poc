@@ -1,0 +1,74 @@
+version: 2
+
+models:
+  - name: fct_trade
+    description: "Trade exposure across banking entities."
+
+    semantic_model:
+      enabled: true
+      name: trade_exposure
+
+    agg_time_dimension: trade_date
+
+    columns:
+      - name: trade_id
+        entity:
+          name: trade
+          type: primary
+
+      - name: agreement_id
+        entity:
+          name: agreement
+          type: foreign
+
+      - name: product_id
+        entity:
+          name: product
+          type: foreign
+
+      - name: counterparty_id
+        entity:
+          name: counterparty
+          type: foreign
+
+      - name: trade_date
+        granularity: day
+        dimension:
+          type: time
+
+      - name: currency
+        dimension:
+          type: categorical
+
+      - name: trade_status
+        dimension:
+          type: categorical
+
+    metrics:
+      - name: trade_count
+        description: "Total number of trade records."
+        type: simple
+        label: Trade Count
+        agg: sum
+        expr: 1
+      
+      - name: settled_trade_count
+        description: "Number of settled trades."
+        type: simple
+        label: Settled Trade Count
+        agg: sum
+        expr: settled_trade_indicator
+
+      - name: trade_amount
+        description: "Sum of trade amounts; must be grouped or filtered by currency."
+        type: simple
+        label: Trade Amount
+        agg: sum
+        expr: trade_amount
+
+      - name: average_trade_amount
+        description: "Average trade amount within a single currency."
+        type: simple
+        label: Average Trade Amount
+        agg: average
+        expr: trade_amount

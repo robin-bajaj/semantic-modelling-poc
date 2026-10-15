@@ -1,0 +1,12 @@
+counterparty_id,counterparty_name,region,risk_rating,active_status
+C001,ABC Capital,North America,Low,Active
+C002,Global Finance,Europe,Medium,Active
+C003,Delta Investments,Asia,High,Active
+C004,Maple Financial,North America,Low,Active
+C005,Pacific Holdings,Asia,Medium,Inactive
+C006,Atlantic Banking,Europe,High,Active
+C007,Northern Trust Group,North America,Low,Active
+C008,Sunrise Capital,Asia,Medium,Active
+C009,Evergreen Partners,Europe,Low,Inactive
+C010,Meridian Finance,North America,High,Active
+  

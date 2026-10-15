@@ -1,0 +1,256 @@
+version: 2
+
+models:
+  - name: stg_counterparty
+    description: "Standardizes all source counterparties, including invalid records."
+
+    columns:
+      - name: counterparty_id
+        description: "Original counterparty business identifier."
+
+      - name: counterparty_name
+        description: "Standardized counterparty name."
+
+      - name: risk_rating
+        description: "Normalized risk category."
+
+      - name: risk_score
+        description: "Derived numeric risk score."
+
+      - name: is_active
+        description: "Active indicator; NULL means unknown."
+
+  
+  - name: stg_agreement
+    description: "Standardized agreement data with lifecycle and expiry indicators."
+
+    columns:
+      - name: agreement_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: counterparty_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('int_counterparty_valid')
+                field: counterparty_id
+
+      - name: agreement_limit
+        data_tests:
+          - not_null
+
+      - name: temporal_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - Expired
+                  - Not Yet Effective
+                  - Within Effective Period
+                  - Invalid Date Range
+
+  - name: stg_trade
+    description: "Standardized trades with currency, settlement and amount indicators."
+
+    columns:
+      - name: trade_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: agreement_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_agreement')
+                field: agreement_id
+
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_product')
+                field: product_id
+
+      - name: trade_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Settled', 'Open', 'Pending']
+
+      - name: currency
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['USD', 'CAD', 'EUR']
+
+      - name: trade_amount
+        data_tests:
+          - not_null
+  
+  - name: stg_product
+    description: "Standardized product classifications and risk indicators."
+
+    columns:
+      - name: product_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: product_name
+        data_tests:
+          - not_null
+
+      - name: asset_class
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - Fixed Income
+                  - Derivatives
+                  - Foreign Exchange
+                  - Equities
+
+      - name: risk_category
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['LOW', 'MEDIUM', 'HIGH']
+
+      - name: product_risk_score
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3]
+                quote: false
+
+      - name: review_category
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - Enhanced Review
+                  - Standard Review
+                  - Simplified Review
+                  - Unclassified
+
+  - name: stg_account
+    description: "Standardized client account information."
+    columns:
+      - name: account_id
+        data_tests:
+          - unique
+          - not_null
+      - name: counterparty_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('int_counterparty_valid')
+                field: counterparty_id
+      - name: base_currency
+        data_tests:
+          - not_null
+
+  - name: stg_strategist
+    description: "Standardized strategist master data."
+    columns:
+      - name: strategist_id
+        data_tests:
+          - unique
+          - not_null
+      - name: strategist_name
+        data_tests:
+          - not_null
+
+  - name: stg_meeting
+    description: "Client meetings and lifecycle indicators."
+    columns:
+      - name: meeting_id
+        data_tests:
+          - unique
+          - not_null
+      - name: account_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_account')
+                field: account_id
+      - name: organizer_strategist_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_strategist')
+                field: strategist_id
+      - name: meeting_date
+        data_tests:
+          - not_null
+
+  - name: stg_meeting_activity
+    description: "Meeting activities and duration indicators."
+    columns:
+      - name: activity_id
+        data_tests:
+          - unique
+          - not_null
+      - name: meeting_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_meeting')
+                field: meeting_id
+      - name: strategist_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_strategist')
+                field: strategist_id
+
+  - name: stg_meeting_attendee
+    description: "Meeting-strategist participation bridge."
+    columns:
+      - name: attendee_id
+        data_tests:
+          - unique
+          - not_null
+      - name: meeting_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_meeting')
+                field: meeting_id
+      - name: strategist_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_strategist')
+                field: strategist_id
+      - name: participation_key
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_meeting_outcome
+    description: "Activity outcomes and satisfaction classifications."
+    columns:
+      - name: outcome_id
+        data_tests:
+          - unique
+          - not_null
+      - name: activity_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_meeting_activity')
+                field: activity_id

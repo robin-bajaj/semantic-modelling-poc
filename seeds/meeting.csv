@@ -1,0 +1,19 @@
+meeting_id,account_id,organizer_strategist_id,meeting_date,meeting_type,meeting_status
+M001,AC001,S001,2025-01-08,Portfolio Review,Completed
+M002,AC002,S003,2025-01-23,Strategy Discussion,Completed
+M003,AC003,S002,2025-02-07,Quarterly Review,Completed
+M004,AC004,S004,2025-02-22,Portfolio Review,Completed
+M005,AC005,S005,2025-03-09,Strategy Discussion,Completed
+M006,AC006,S001,2025-03-24,Quarterly Review,Completed
+M007,AC007,S002,2025-04-08,Portfolio Review,Completed
+M008,AC008,S003,2025-04-23,Strategy Discussion,Cancelled
+M009,AC009,S004,2025-05-08,Quarterly Review,Completed
+M010,AC010,S006,2025-05-23,Portfolio Review,Completed
+M011,AC011,S005,2025-06-07,Strategy Discussion,Completed
+M012,AC012,S001,2025-06-22,Quarterly Review,Completed
+M013,AC001,S001,2025-07-07,Portfolio Review,Completed
+M014,AC002,S003,2025-07-22,Strategy Discussion,Completed
+M015,AC003,S002,2025-08-06,Quarterly Review,Scheduled
+M016,AC004,S004,2025-08-21,Portfolio Review,Scheduled
+M017,AC005,S005,2025-09-05,Strategy Discussion,Cancelled
+M018,AC006,S001,2025-09-20,Quarterly Review,Scheduled

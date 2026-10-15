@@ -1,0 +1,16 @@
+agreement_id,counterparty_id,agreement_type,agreement_status,effective_date,expiry_date,agreement_limit
+A001,C001,Master Agreement,Active,2024-01-15,2027-01-14,5000000
+A002,C001,Collateral Agreement,Active,2024-03-01,2027-02-28,2000000
+A003,C002,Master Agreement,Active,2023-06-10,2026-12-31,8000000
+A004,C002,Trading Agreement,Active,2024-05-20,2027-05-19,3500000
+A005,C003,Master Agreement,Under Review,2024-07-01,2027-06-30,4000000
+A006,C004,Master Agreement,Active,2023-09-15,2028-09-14,6500000
+A007,C004,Collateral Agreement,Active,2024-02-10,2027-02-09,1500000
+A008,C005,Trading Agreement,Inactive,2023-01-01,2025-12-31,2500000
+A009,C006,Master Agreement,Active,2024-04-01,2027-03-31,9000000
+A010,C007,Master Agreement,Active,2024-06-15,2028-06-14,7000000
+A011,C008,Trading Agreement,Active,2024-08-01,2027-07-31,3000000
+A012,C008,Collateral Agreement,Active,2024-08-15,2027-08-14,1200000
+A013,C009,Master Agreement,Inactive,2022-05-01,2025-04-30,4500000
+A014,C010,Master Agreement,Active,2024-09-01,2028-08-31,10000000
+A015,C010,Trading Agreement,Under Review,2025-01-10,2028-01-09,5500000

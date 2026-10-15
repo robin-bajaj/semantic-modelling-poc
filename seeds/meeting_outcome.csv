@@ -1,0 +1,17 @@
+outcome_id,activity_id,outcome_type,satisfaction_score,follow_up_due_date
+O002,ACT002,Neutral,2,
+O003,ACT003,Action Required,3,2025-12-31
+O004,ACT004,Positive,4,
+O006,ACT006,Action Required,1,2025-12-31
+O007,ACT007,Positive,2,
+O008,ACT009,Neutral,3,
+O010,ACT011,Positive,5,
+O011,ACT012,Neutral,1,
+O012,ACT013,Action Required,2,2025-12-31
+O014,ACT015,Neutral,4,
+O015,ACT016,Action Required,5,2025-12-31
+O016,ACT018,Positive,1,
+O018,ACT020,Action Required,3,2025-12-31
+O019,ACT021,Positive,4,
+O020,ACT022,Neutral,5,
+O022,ACT024,Positive,2,

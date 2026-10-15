@@ -1,0 +1,6 @@
+product_id,product_name,asset_class,risk_category
+P001,Government Bond,Fixed Income,Low
+P002,Interest Rate Swap,Derivatives,Medium
+P003,Corporate Bond,Fixed Income,Medium
+P004,FX Forward,Foreign Exchange,Medium
+P005,Equity Option,Equities,High
