@@ -45,3 +45,36 @@ models:
       - name: rejection_reason
         data_tests:
           - not_null
+
+  
+  - name: int_trade_exposure
+    description: "Trade-level exposure across Counterparty, Agreement, Trade and Product."
+    columns:
+      - name: trade_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: agreement_id
+        data_tests:
+          - not_null
+
+      - name: product_id
+        data_tests:
+          - not_null
+
+  - name: int_agreement_trade_summary
+    description: "Agreement-level trade aggregation preserving agreements without trades."
+    columns:
+      - name: agreement_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: trade_count
+        data_tests:
+          - not_null
+
+      - name: has_no_trades
+        data_tests:
+          - not_null

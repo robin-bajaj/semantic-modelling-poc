@@ -19,3 +19,123 @@ models:
 
       - name: is_active
         description: "Active indicator; NULL means unknown."
+
+  
+  - name: stg_agreement
+    description: "Standardized agreement data with lifecycle and expiry indicators."
+
+    columns:
+      - name: agreement_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: counterparty_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('int_counterparty_valid')
+                field: counterparty_id
+
+      - name: agreement_limit
+        data_tests:
+          - not_null
+
+      - name: temporal_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - Expired
+                  - Not Yet Effective
+                  - Within Effective Period
+                  - Invalid Date Range
+
+  - name: stg_trade
+    description: "Standardized trades with currency, settlement and amount indicators."
+
+    columns:
+      - name: trade_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: agreement_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_agreement')
+                field: agreement_id
+
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_product')
+                field: product_id
+
+      - name: trade_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Settled', 'Open', 'Pending']
+
+      - name: currency
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['USD', 'CAD', 'EUR']
+
+      - name: trade_amount
+        data_tests:
+          - not_null
+  
+  - name: stg_product
+    description: "Standardized product classifications and risk indicators."
+
+    columns:
+      - name: product_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: product_name
+        data_tests:
+          - not_null
+
+      - name: asset_class
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - Fixed Income
+                  - Derivatives
+                  - Foreign Exchange
+                  - Equities
+
+      - name: risk_category
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['LOW', 'MEDIUM', 'HIGH']
+
+      - name: product_risk_score
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3]
+                quote: false
+
+      - name: review_category
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - Enhanced Review
+                  - Standard Review
+                  - Simplified Review
+                  - Unclassified
