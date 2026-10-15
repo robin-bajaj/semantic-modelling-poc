@@ -78,3 +78,43 @@ models:
       - name: has_no_trades
         data_tests:
           - not_null
+
+  
+  - name: int_meeting_outcome_summary
+    description: "Outcome metrics at meeting grain."
+    columns:
+      - name: meeting_id
+        data_tests:
+          - unique
+          - not_null
+      - name: outcome_count
+        data_tests:
+          - not_null
+
+  - name: int_meeting_attendance_summary
+    description: "Participation metrics at meeting grain."
+    columns:
+      - name: meeting_id
+        data_tests:
+          - unique
+          - not_null
+      - name: attendee_count
+        data_tests:
+          - not_null
+
+  - name: int_account_engagement
+    description: "Aggregated engagement metrics at account grain."
+    columns:
+      - name: account_id
+        data_tests:
+          - unique
+          - not_null
+      - name: meeting_count
+        data_tests:
+          - not_null
+      - name: activity_count
+        data_tests:
+          - not_null
+      - name: outcome_count
+        data_tests:
+          - not_null

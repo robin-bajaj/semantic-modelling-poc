@@ -139,3 +139,118 @@ models:
                   - Standard Review
                   - Simplified Review
                   - Unclassified
+
+  - name: stg_account
+    description: "Standardized client account information."
+    columns:
+      - name: account_id
+        data_tests:
+          - unique
+          - not_null
+      - name: counterparty_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('int_counterparty_valid')
+                field: counterparty_id
+      - name: base_currency
+        data_tests:
+          - not_null
+
+  - name: stg_strategist
+    description: "Standardized strategist master data."
+    columns:
+      - name: strategist_id
+        data_tests:
+          - unique
+          - not_null
+      - name: strategist_name
+        data_tests:
+          - not_null
+
+  - name: stg_meeting
+    description: "Client meetings and lifecycle indicators."
+    columns:
+      - name: meeting_id
+        data_tests:
+          - unique
+          - not_null
+      - name: account_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_account')
+                field: account_id
+      - name: organizer_strategist_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_strategist')
+                field: strategist_id
+      - name: meeting_date
+        data_tests:
+          - not_null
+
+  - name: stg_meeting_activity
+    description: "Meeting activities and duration indicators."
+    columns:
+      - name: activity_id
+        data_tests:
+          - unique
+          - not_null
+      - name: meeting_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_meeting')
+                field: meeting_id
+      - name: strategist_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_strategist')
+                field: strategist_id
+
+  - name: stg_meeting_attendee
+    description: "Meeting-strategist participation bridge."
+    columns:
+      - name: attendee_id
+        data_tests:
+          - unique
+          - not_null
+      - name: meeting_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_meeting')
+                field: meeting_id
+      - name: strategist_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_strategist')
+                field: strategist_id
+      - name: participation_key
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_meeting_outcome
+    description: "Activity outcomes and satisfaction classifications."
+    columns:
+      - name: outcome_id
+        data_tests:
+          - unique
+          - not_null
+      - name: activity_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_meeting_activity')
+                field: activity_id
